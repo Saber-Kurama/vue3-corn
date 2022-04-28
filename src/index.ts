@@ -1,8 +1,8 @@
 import { App, Plugin } from "vue";
-import TooltipButton from "./TooltipButton.vue";
+import CronInput from "./CronInput";
 const install = (app: App) => {
-  app.component(TooltipButton.name, TooltipButton);
+  app.component(CronInput.name, CronInput);
 };
 
-TooltipButton.install = install;
-export default TooltipButton as unknown as Plugin;
+CronInput.install = install;
+export default CronInput as unknown as Plugin;

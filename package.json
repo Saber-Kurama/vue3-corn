@@ -1,0 +1,82 @@
+{
+  "name": "vue3-corn",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "umd": {
+    "file": "dist/index.min.js",
+    "style": "dist/css/index.css",
+    "module": "ArcoMaterial"
+  },
+  "buildInput": "src/index.ts",
+  "engines": {
+    "node": ">=10",
+    "pnpm": ">=3"
+  },
+  "bugs": {},
+  "author": {},
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "dev": "npm run storybook",
+    "build": "arco-vue-scripts build:material 'src/index.vue' & npm run dtsgen",
+    "docgen": "arco-vue-scripts docgen -i 'src/TEMPLATE.md'",
+    "dtsgen": "arco-vue-scripts dtsgen 'src/*.{ts,tsx,vue}'",
+    "test": "arco-vue-scripts test",
+    "clean": "rm -rf dist && rm -rf docs",
+    "prepublishOnly": "npm run clean && npm run build && npm run docgen",
+    "preview": "arco preview",
+    "sync": "arco sync",
+    "generate": "arco generate",
+    "build:dango": "pnpm run build:component && pnpm run build:style",
+    "build:dango:component": "dango-vue build:component",
+    "build:dango:style": "dango-vue build:style",
+    "change": "pnpm changeset",
+    "vp": "pnpm changeset version",
+    "pub": "pnpm changeset publish",
+    "release": "pnpm changeset publish",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@arco-design/arco-vue-scripts": "^0.2.9",
+    "@arco-design/web-vue": "^2.20.0",
+    "@babel/core": "^7.17.5",
+    "@changesets/cli": "^2.20.0",
+    "@dangojs/vue-scripts": "^0.0.4",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-links": "^6.4.20",
+    "@storybook/builder-webpack5": "^6.4.20",
+    "@storybook/manager-webpack5": "^6.4.20",
+    "@storybook/vue3": "^6.4.20",
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "rollup": "^2.70.1",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.6.3",
+    "vite": "^2.8.6",
+    "vue": "^3.2.31",
+    "vue-loader": "^16.8.3"
+  },
+  "publishConfig": {
+    "registry": "",
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@arco-design/web-vue": "^2.20.0",
+    "vue": "^3.2.31"
+  },
+  "files": [
+    "es",
+    "lib",
+    "docs",
+    "demo"
+  ]
+}

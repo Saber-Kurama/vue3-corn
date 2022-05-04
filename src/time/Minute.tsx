@@ -72,7 +72,7 @@ export default defineComponent({
           <Row>
             <Radio value={EVERY} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <span>每一秒钟</span>
+                <span>每一分钟</span>
               </div>
             </Radio>
           </Row>

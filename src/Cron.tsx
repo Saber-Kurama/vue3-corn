@@ -4,8 +4,8 @@ import Second from "./time/Second";
 import Minute from "./time/Minute";
 import Hour from "./time/Hour";
 
-const getCornText = ({ second, minute }: any) => {
-  return `${second} ${minute}`;
+const getCornText = ({ second, minute, hour }: any) => {
+  return `${second} ${minute} ${hour}`;
 };
 export default defineComponent({
   name: "Corn",
@@ -21,10 +21,11 @@ export default defineComponent({
   setup(props, { emit }) {
     const second = ref("*");
     const minute = ref("*");
-    watch([second, minute], () => {
+    const hour = ref("*");
+    watch([second, minute, hour], () => {
       emit(
         "update:modelValue",
-        getCornText({ second: second.value, minute: minute.value })
+        getCornText({ second: second.value, minute: minute.value, hour: hour.value })
       );
     });
     return () => {
@@ -37,7 +38,7 @@ export default defineComponent({
             <Minute v-model={minute.value} />
           </TabPane>
           <TabPane key="3" title="时">
-            <Hour />
+            <Hour v-model={hour.value} />
           </TabPane>
           <TabPane key="4" title="日">
             Content of Tab Panel 2

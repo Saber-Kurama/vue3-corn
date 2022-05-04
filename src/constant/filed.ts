@@ -30,4 +30,5 @@ export const
   // default cron expression
   DEFAULT_CRON_EXPRESSION = '0 0 12 * * ?',
 
-  OPTIONS_SELECT = Array.from({ length: 60 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[]
+  OPTIONS_SELECT = Array.from({ length: 60 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[],
+  OPTIONS_HOUR_SELECT = Array.from({ length: 24 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[] 

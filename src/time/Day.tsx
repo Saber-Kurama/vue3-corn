@@ -1,4 +1,4 @@
-import { defineComponent, ref } from "vue";
+import { defineComponent, reactive, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
 import {
   EVERY,
@@ -7,6 +7,79 @@ import {
   OPTIONS_WEEK_EN_SELECT,
   OPTIONS_WEEK_SELECT,
 } from "../constant/filed";
+
+const getDayCronEveryText = (cronEvery: any, dayData: any, weekData: any) => {
+  if(cronEvery === '*'){
+    return {
+      day: '*',
+      week: '?'
+    }
+  }
+  if(cronEvery === '1'){
+    return {
+      day: '?',
+      week: `${weekData.incrementStart}/${weekData.incrementIncrement}`
+    }
+  }
+  if(cronEvery === '2'){
+    return {
+      week: '?',
+      day: `${dayData.incrementStart}/${dayData.incrementIncrement}`
+    }
+  }
+  if(cronEvery === '3'){
+    return {
+      day: '?',
+      week: weekData.specificSpecific?.join(',') 
+    }
+  }
+  if(cronEvery === '4'){
+    return {
+      week: '?',
+      day: dayData.specificSpecific?.join(',') 
+    }
+  }
+  if(cronEvery === '5'){
+    return {
+      day: 'L',
+      week: '?'
+    }
+  }
+  if(cronEvery === '6'){
+    return {
+      day: 'LW',
+      week: '?'
+    }
+  }
+  if(cronEvery === '7'){
+    return {
+      day: `${dayData.cronLastSpecificDomDay}L`,
+      week: '?'
+    }
+  }
+  if(cronEvery === '8'){
+    return {
+      day: `L-${dayData.cronDaysBeforeEomMinus}`,
+      week: '?'
+    }
+  }
+  if(cronEvery === '9'){
+    return {
+      day: `${dayData.cronDaysNearestWeekday}W`,
+      week: '?'
+    }
+  }
+  if(cronEvery === '10'){
+    return {
+      week: `${weekData.cronNthDayDay}#${weekData.cronNthDayDay}`,
+      day: '?'
+    }
+  }
+  return {
+    day: '*',
+    week: '?' 
+  }
+}
 
 export default defineComponent({
   name: "Day",
@@ -25,11 +98,33 @@ export default defineComponent({
     week: String,
   },
   emits: ["update:day", "update:week"],
-  setup() {
+  setup(props, {emit}) {
     const inputNumberStyle = {
       width: "120px",
     };
     const cronEvery = ref(EVERY);
+    const dayData = reactive({
+      incrementStart: 1,
+      incrementIncrement: 1,
+      rangeStart: 1,
+      rangeEnd: 1,
+      specificSpecific: [] as any[],
+      cronLastSpecificDomDay: 1,
+      cronDaysBeforeEomMinus: 1,
+      cronDaysNearestWeekday: 1,
+    });
+    const weekData = reactive({
+      incrementStart: 1,
+      incrementIncrement: 1,
+      specificSpecific: [],
+      cronNthDayDay: 1,
+      cronNthDayNth: 1,
+    });
+    watch([cronEvery, dayData, weekData], () => {
+      const text = getDayCronEveryText(cronEvery.value, dayData, weekData);
+      emit('update:day', text?.day);
+      emit('update:week', text?.week) 
+    })
     return () => {
       return (
         <div class="d-cron-row-wrap">
@@ -47,6 +142,7 @@ export default defineComponent({
                 <Select
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
+                  v-model={weekData.incrementStart}
                 />
                 <span>开始 每隔</span>
                 <InputNumber
@@ -54,6 +150,7 @@ export default defineComponent({
                   style={inputNumberStyle}
                   min={1}
                   max={7}
+                  v-model={weekData.incrementIncrement}
                 />
                 <span>周执行</span>
               </div>
@@ -68,6 +165,7 @@ export default defineComponent({
                   style={inputNumberStyle}
                   min={1}
                   max={31}
+                  v-model={dayData.incrementStart}
                 />
                 <span>天开始 每隔</span>
                 <InputNumber
@@ -75,6 +173,7 @@ export default defineComponent({
                   style={inputNumberStyle}
                   min={1}
                   max={31}
+                  v-model={dayData.incrementIncrement}
                 />
                 <span>天执行</span>
               </div>
@@ -88,6 +187,7 @@ export default defineComponent({
                   options={OPTIONS_WEEK_EN_SELECT}
                   style={{ width: "200px" }}
                   multiple
+                  v-model={weekData.specificSpecific}
                 ></Select>
               </div>
             </Radio>
@@ -100,6 +200,7 @@ export default defineComponent({
                   options={OPTIONS_DAY_SELECT}
                   style={{ width: "200px" }}
                   multiple
+                  v-model={dayData.specificSpecific}
                 ></Select>
               </div>
             </Radio>
@@ -123,6 +224,7 @@ export default defineComponent({
                 <Select
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
+                  v-model={dayData.cronLastSpecificDomDay}
                 />
               </div>
             </Radio>
@@ -135,6 +237,7 @@ export default defineComponent({
                   style={inputNumberStyle}
                   min={1}
                   max={31}
+                  v-model={dayData.cronDaysBeforeEomMinus}
                 />
                 <span>在本月底前</span>
               </div>
@@ -149,6 +252,7 @@ export default defineComponent({
                   style={inputNumberStyle}
                   min={1}
                   max={31}
+                  v-model={dayData.cronDaysNearestWeekday}
                 />
               </div>
             </Radio>
@@ -161,11 +265,17 @@ export default defineComponent({
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
-                  max={31}
+                  max={5}
+                  v-model={weekData.cronNthDayNth}
                 />
+                <Select
+                  options={OPTIONS_WEEK_SELECT}
+                  style={inputNumberStyle}
+                  v-model={weekData.cronNthDayDay}
+                ></Select>
               </div>
             </Radio>
-          </Row>         
+          </Row>
         </div>
       );
     };

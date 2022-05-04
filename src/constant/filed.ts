@@ -1,3 +1,5 @@
+import { SelectOptionData } from "@arco-design/web-vue";
+
 export const
   /** 12 months */
   JAN = 'JAN', FEB = 'FEB', MAR = 'MAR', APR = 'APR', MAY = 'MAY', JUN = 'JUN', // 1 - 6
@@ -26,4 +28,6 @@ export const
   //
   UPPER_LIMIT_YEAR = 2099,
   // default cron expression
-  DEFAULT_CRON_EXPRESSION = '0 0 12 * * ?'
+  DEFAULT_CRON_EXPRESSION = '0 0 12 * * ?',
+
+  OPTIONS_SELECT = Array.from({ length: 60 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[]

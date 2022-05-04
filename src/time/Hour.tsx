@@ -3,7 +3,7 @@ import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
 import { EVERY, OPTIONS_SELECT } from "../constant/filed";
 
 export default defineComponent({
-  name: "Minute",
+  name: "Hour",
   setup() {
     const inputNumberStyle = {
       width: "100px",
@@ -15,7 +15,7 @@ export default defineComponent({
           <Row>
             <Radio value={EVERY}>
               <div class="d-cron-second-radio-item">
-                <span>每一分钟</span>
+                <span>每一小时</span>
               </div>
             </Radio>
           </Row>

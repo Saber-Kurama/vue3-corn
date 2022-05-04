@@ -1,53 +1,155 @@
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
-import { EVERY } from "../constant/filed";
+import { EVERY, OPTIONS_SELECT } from "../constant/filed";
 
+const getSecondText = ({cronEvery,
+  incrementStart,
+  incrementIncrement,
+  rangeStart,
+  rangeEnd,
+  specificSpecific} : any ) => {
+    if(cronEvery === '*'){
+      return '*'
+    }
+    if(cronEvery === '1'){
+      return `${incrementStart}/${incrementIncrement}`;
+    }
+    if(cronEvery === '2'){
+      return `${rangeStart}-${rangeEnd}`;
+    }
+    if(cronEvery === '3'){
+      return specificSpecific?.join(',') 
+    }
+    return '*'
+}
 export default defineComponent({
-  name: "Corn",
-  setup() {
+  name: "Second",
+  props: {
+    /**
+     * @zh 绑定值
+     * @en Value
+     * @vModel
+     */
+    modelValue: String,
+  },
+  emits: [
+    'update:modelValue',
+  ],
+  setup(props, { emit }) {
     const inputNumberStyle = {
-      width: "100px",
+      width: "120px",
     };
+    const cronEvery = ref(EVERY);
+    const incrementStart = ref(3);
+    const incrementIncrement = ref(5);
+    const rangeStart = ref(0);
+    const rangeEnd = ref(0);
+    const specificSpecific = ref<any>([]);
+
+    watch(
+      () => props.modelValue,
+      (val) => {
+        if (val === "*") {
+          cronEvery.value = EVERY;
+        } else if (val?.includes("/")) {
+          cronEvery.value = "1";
+        } else if (val?.includes("-")) {
+          cronEvery.value = "2";
+        } else if (val) {
+          cronEvery.value = "3";
+        }
+      },
+      {
+        immediate: true,
+      }
+    );
+    watch(
+      [
+        cronEvery,
+        incrementStart,
+        incrementIncrement,
+        rangeStart,
+        rangeEnd,
+        specificSpecific,
+      ],
+      () => {
+        emit("update:modelValue", getSecondText({
+          cronEvery: cronEvery.value,
+          incrementStart: incrementStart.value,
+          incrementIncrement: incrementIncrement.value,
+          rangeStart: rangeStart.value,
+          rangeEnd: rangeEnd.value,
+          specificSpecific: specificSpecific.value, 
+        }));
+      }
+    );
     return () => {
       return (
-        <div default-active-key="2">
+        <div class="d-cron-row-wrap">
+          {props.modelValue}
           <Row>
-            <Radio value={EVERY}>
+            <Radio value={EVERY} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <sapn>每一秒钟</sapn>
+                <span>每一秒钟</span>
               </div>
             </Radio>
           </Row>
           <Row>
-            <Radio value={1}>
+            <Radio value={"1"} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <sapn>从第</sapn>
-                <InputNumber mode="button" style={inputNumberStyle} />{" "}
-                <sapn>秒开始每</sapn>
-                <InputNumber mode="button" style={inputNumberStyle} />
-                <sapn>秒</sapn>
+                <span>从第</span>
+                <InputNumber
+                  mode="button"
+                  style={inputNumberStyle}
+                  min={0}
+                  max={59}
+                  v-model={incrementStart.value}
+                />
+                <span>秒开始 每</span>
+                <InputNumber
+                  mode="button"
+                  style={inputNumberStyle}
+                  min={1}
+                  max={59}
+                  v-model={incrementIncrement.value}
+                />
+                <span>秒</span>
               </div>
             </Radio>
           </Row>
           <Row>
-            <Radio value={2}>
+            <Radio value={"2"} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <sapn>周期从</sapn>
-                <InputNumber mode="button" /> <sapn>到</sapn>
-                <InputNumber mode="button" />
-                <sapn>秒</sapn>
+                <span>周期从</span>
+                <InputNumber
+                  mode="button"
+                  style={inputNumberStyle}
+                  min={1}
+                  max={59}
+                  v-model={rangeStart.value}
+                />{" "}
+                <span>到</span>
+                <InputNumber
+                  mode="button"
+                  style={inputNumberStyle}
+                  min={1}
+                  max={59}
+                  v-model={rangeEnd.value}
+                />
+                <span>秒</span>
               </div>
             </Radio>
           </Row>
           <Row>
-            <Radio value={3}>
+            <Radio value={"3"} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <sapn>具体秒数</sapn>
-                <Select>
-                  <Select.Option>Beijing</Select.Option>
-                  <Select.Option>Shanghai</Select.Option>
-                  <Select.Option>Guangzhou</Select.Option>
-                </Select>
+                <span>具体秒数</span>
+                <Select
+                  options={OPTIONS_SELECT}
+                  style={{ width: "200px" }}
+                  multiple
+                  v-model={specificSpecific.value}
+                ></Select>
               </div>
             </Radio>
           </Row>

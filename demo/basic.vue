@@ -1,14 +1,14 @@
 <template>
-  <tooltip-button tip="button tip">Demo Basic</tooltip-button>
+  <CronInput></CronInput>
 </template>
 
 <script lang="ts">
-import TooltipButton from 'vue3-corn';
+import CronInput from '@dangojs/vue3-corn';
 // 目前vue-live导出defineComponent存在问题，所以仅支持普通对象导出。
 export default {
   name: 'BasicDemo',
   components: {
-    TooltipButton,
+    CronInput,
   },
 };
 </script>

@@ -1,27 +1,8 @@
 import { defineComponent, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
 import { EVERY, OPTIONS_SELECT } from "../constant/filed";
+import { getCronEveryText } from "../utils";
 
-const getSecondText = ({cronEvery,
-  incrementStart,
-  incrementIncrement,
-  rangeStart,
-  rangeEnd,
-  specificSpecific} : any ) => {
-    if(cronEvery === '*'){
-      return '*'
-    }
-    if(cronEvery === '1'){
-      return `${incrementStart}/${incrementIncrement}`;
-    }
-    if(cronEvery === '2'){
-      return `${rangeStart}-${rangeEnd}`;
-    }
-    if(cronEvery === '3'){
-      return specificSpecific?.join(',') 
-    }
-    return '*'
-}
 export default defineComponent({
   name: "Second",
   props: {
@@ -32,9 +13,7 @@ export default defineComponent({
      */
     modelValue: String,
   },
-  emits: [
-    'update:modelValue',
-  ],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const inputNumberStyle = {
       width: "120px",
@@ -73,14 +52,17 @@ export default defineComponent({
         specificSpecific,
       ],
       () => {
-        emit("update:modelValue", getSecondText({
-          cronEvery: cronEvery.value,
-          incrementStart: incrementStart.value,
-          incrementIncrement: incrementIncrement.value,
-          rangeStart: rangeStart.value,
-          rangeEnd: rangeEnd.value,
-          specificSpecific: specificSpecific.value, 
-        }));
+        emit(
+          "update:modelValue",
+          getCronEveryText({
+            cronEvery: cronEvery.value,
+            incrementStart: incrementStart.value,
+            incrementIncrement: incrementIncrement.value,
+            rangeStart: rangeStart.value,
+            rangeEnd: rangeEnd.value,
+            specificSpecific: specificSpecific.value,
+          })
+        );
       }
     );
     return () => {

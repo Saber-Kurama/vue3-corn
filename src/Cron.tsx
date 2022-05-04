@@ -4,9 +4,9 @@ import Second from "./time/Second";
 import Minute from "./time/Minute";
 import Hour from "./time/Hour";
 
-const getCornText = ({second}: any) => {
-  return `${second} `
-}
+const getCornText = ({ second, minute }: any) => {
+  return `${second} ${minute}`;
+};
 export default defineComponent({
   name: "Corn",
   props: {
@@ -17,14 +17,16 @@ export default defineComponent({
      */
     modelValue: String,
   },
-  emits: [
-    'update:modelValue',
-  ],
-  setup(props, {emit}) {
-    const second = ref('*');
-    watch([second], () => {
-      emit('update:modelValue', getCornText({second: second.value}))
-    })
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const second = ref("*");
+    const minute = ref("*");
+    watch([second, minute], () => {
+      emit(
+        "update:modelValue",
+        getCornText({ second: second.value, minute: minute.value })
+      );
+    });
     return () => {
       return (
         <Tabs default-active-key="1">
@@ -32,7 +34,7 @@ export default defineComponent({
             <Second v-model={second.value} />
           </TabPane>
           <TabPane key="2" title="分">
-            <Minute />
+            <Minute v-model={minute.value} />
           </TabPane>
           <TabPane key="3" title="时">
             <Hour />

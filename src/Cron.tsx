@@ -6,10 +6,12 @@ import Hour from "./time/Hour";
 import Day from "./time/Day";
 import Month from "./time/Month";
 import Year from "./time/Year";
+import { getCronByText } from "./utils";
 
 const getCornText = ({ second, minute, hour, day, month, week, year }: any) => {
   return `${second} ${minute} ${hour} ${day} ${month} ${week} ${year}`;
 };
+
 export default defineComponent({
   name: "Corn",
   props: {
@@ -43,6 +45,18 @@ export default defineComponent({
         })
       );
     });
+    watch(() => props.modelValue, () => {
+      const d = getCronByText(props.modelValue || '');
+      second.value = d.second;
+      minute.value = d.minute;
+      hour.value = d.hour;
+      day.value = d.day;
+      week.value = d.week;
+      month.value = d.month;
+      year.value = d.year;
+    }, {
+      immediate: true,
+    })
     return () => {
       return (
         <Tabs default-active-key="1">

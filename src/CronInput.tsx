@@ -15,12 +15,12 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, {emit}) {
-    const cron = ref("1-15 * 0-20 * * ? *");
+    const cron = ref(props.modelValue);
     const inputCron = ref(props.modelValue);
     const popupVisible = ref(false);
     const handlePopupVisibleChange = (visible: boolean) => {
       // _popupVisible.value = visible;
-      console.log('visiblevisible', visible);
+      // console.log('visiblevisible', visible);
     };
     const onOK = () => {
       inputCron.value = cron.value;

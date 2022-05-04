@@ -29,7 +29,7 @@ export default defineComponent({
     };
     return () => {
       return (
-        <Popover trigger="click" v-slots={popoverSlots}>
+        <Popover trigger="click" v-slots={popoverSlots} position={'bottom'} content-style={{width: '600px'}}>
           <Input v-slots={inputSlots}></Input>
         </Popover>
       );

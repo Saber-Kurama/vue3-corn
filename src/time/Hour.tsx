@@ -68,7 +68,6 @@ export default defineComponent({
     return () => {
       return (
         <div class="d-cron-row-wrap">
-          {props.modelValue}
           <Row>
             <Radio value={EVERY} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">

@@ -3,9 +3,12 @@ import { Tabs, TabPane } from "@arco-design/web-vue";
 import Second from "./time/Second";
 import Minute from "./time/Minute";
 import Hour from "./time/Hour";
+import Day from "./time/Day";
+import Month from "./time/Month";
+import Year from "./time/Year";
 
-const getCornText = ({ second, minute, hour }: any) => {
-  return `${second} ${minute} ${hour}`;
+const getCornText = ({ second, minute, hour, day, month, week, year }: any) => {
+  return `${second} ${minute} ${hour} ${day} ${month} ${week} ${year}`;
 };
 export default defineComponent({
   name: "Corn",
@@ -22,10 +25,19 @@ export default defineComponent({
     const second = ref("*");
     const minute = ref("*");
     const hour = ref("*");
-    watch([second, minute, hour], () => {
+    const day = ref("*");
+    const week = ref("?");
+    const month = ref("*");
+    const year = ref("*");
+    watch([second, minute, hour, day, week, month, year], () => {
       emit(
         "update:modelValue",
-        getCornText({ second: second.value, minute: minute.value, hour: hour.value })
+        getCornText({
+          second: second.value,
+          minute: minute.value,
+          hour: hour.value,
+          year: year.value
+        })
       );
     });
     return () => {
@@ -41,20 +53,25 @@ export default defineComponent({
             <Hour v-model={hour.value} />
           </TabPane>
           <TabPane key="4" title="日">
-            Content of Tab Panel 2
+            <Day
+              v-models={[
+                [day.value, "day"],
+                [week.value, "week"],
+              ]}
+            />
           </TabPane>
           <TabPane key="5" title="月">
-            Content of Tab Panel 2
+            <Month v-model={month.value} />
           </TabPane>
-          <TabPane key="6" title="周">
+          {/* <TabPane key="6" title="周">
             Content of Tab Panel 2
-          </TabPane>
+          </TabPane> */}
           <TabPane key="7" title="年">
-            Content of Tab Panel 2
+            <Year v-model={year.value} />
           </TabPane>
-          <TabPane key="8" title="帮助">
+          {/* <TabPane key="8" title="帮助">
             Content of Tab Panel 2
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       );
     };

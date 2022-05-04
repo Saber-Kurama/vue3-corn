@@ -1,9 +1,11 @@
 import { SelectOptionData } from "@arco-design/web-vue";
 
+const WeekCn = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+const WeekEn = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 export const
   /** 12 months */
   JAN = 'JAN', FEB = 'FEB', MAR = 'MAR', APR = 'APR', MAY = 'MAY', JUN = 'JUN', // 1 - 6
-  JUL = 'JUL', AUG = 'AUG', SEP = 'SEP', OCT = 'OCT', NOV = 'NOV', DEC = 'DEC', // 7 - 12
+  JUL = 'JUL', AUG = 'AUG', SEP = 'AUG', OCT = 'OCT', NOV = 'NOV', DEC = 'DEC', // 7 - 12
   MONTHS = [JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC],
   /** 7 days of week */
   SUN = 'SUN', MON = 'MON', TUE = 'TUE', WED = 'WED', THU = 'THU', FRI = 'FRI', SAT = 'SAT',
@@ -31,4 +33,8 @@ export const
   DEFAULT_CRON_EXPRESSION = '0 0 12 * * ?',
 
   OPTIONS_SELECT = Array.from({ length: 60 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[],
-  OPTIONS_HOUR_SELECT = Array.from({ length: 24 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[] 
+  OPTIONS_HOUR_SELECT = Array.from({ length: 24 }, (_, index) => ({ label: `${index}`, value: index })) as unknown as SelectOptionData[],
+  OPTIONS_WEEK_SELECT = Array.from({ length: 7 }, (_, index) => ({ label: `${WeekCn[index]}`, value: index + 1 })) as unknown as SelectOptionData[],
+  OPTIONS_WEEK_EN_SELECT = Array.from({ length: 7 }, (_, index) => ({ label: `${WeekCn[index]}`, value: `${WeekEn[index]}` })) as unknown as SelectOptionData[],
+  OPTIONS_DAY_SELECT = Array.from({ length: 31 }, (_, index) => ({ label: `${index + 1}`, value: index + 1 })) as unknown as SelectOptionData[],
+  OPTIONS_YEAR_SELECT = Array.from({ length: 79 }, (_, index) => ({ label: `${index + 2021}`, value: index + 2021 })) as unknown as SelectOptionData[] 

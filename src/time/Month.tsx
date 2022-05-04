@@ -1,6 +1,6 @@
 import { defineComponent, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
-import { EVERY, OPTIONS_HOUR_SELECT } from "../constant/filed";
+import { EVERY, OPTIONS_HOUR_SELECT, OPTIONS_MONTH_SELECT } from "../constant/filed";
 import { getCronEveryText } from "../utils";
 
 export default defineComponent({
@@ -71,7 +71,7 @@ export default defineComponent({
           <Row>
             <Radio value={EVERY} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <span>每一小时</span>
+                <span>每一月</span>
               </div>
             </Radio>
           </Row>
@@ -83,50 +83,50 @@ export default defineComponent({
                   mode="button"
                   style={inputNumberStyle}
                   min={0}
-                  max={59}
+                  max={12}
                   v-model={incrementStart.value}
                 />
-                <span>小时开始 每</span>
+                <span>开始 每</span>
                 <InputNumber
                   mode="button"
                   style={inputNumberStyle}
-                  min={1}
-                  max={59}
+                  min={0}
+                  max={12}
                   v-model={incrementIncrement.value}
                 />
-                <span>小时</span>
+                <span>月执行</span>
               </div>
             </Radio>
           </Row>
           <Row>
             <Radio value={"2"} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <span>周期从</span>
+                <span>从</span>
                 <InputNumber
                   mode="button"
                   style={inputNumberStyle}
-                  min={1}
-                  max={59}
+                  min={0}
+                  max={12}
                   v-model={rangeStart.value}
                 />{" "}
                 <span>到</span>
                 <InputNumber
                   mode="button"
                   style={inputNumberStyle}
-                  min={1}
-                  max={59}
+                  min={0}
+                  max={12}
                   v-model={rangeEnd.value}
                 />
-                <span>小时</span>
+                <span></span>
               </div>
             </Radio>
           </Row>
           <Row>
             <Radio value={"3"} v-model={cronEvery.value}>
               <div class="d-cron-second-radio-item">
-                <span>具体小时数</span>
+                <span>具体月数</span>
                 <Select
-                  options={OPTIONS_HOUR_SELECT}
+                  options={OPTIONS_MONTH_SELECT}
                   style={{ width: "200px" }}
                   multiple
                   v-model={specificSpecific.value}

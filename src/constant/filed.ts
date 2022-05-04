@@ -37,4 +37,5 @@ export const
   OPTIONS_WEEK_SELECT = Array.from({ length: 7 }, (_, index) => ({ label: `${WeekCn[index]}`, value: index + 1 })) as unknown as SelectOptionData[],
   OPTIONS_WEEK_EN_SELECT = Array.from({ length: 7 }, (_, index) => ({ label: `${WeekCn[index]}`, value: `${WeekEn[index]}` })) as unknown as SelectOptionData[],
   OPTIONS_DAY_SELECT = Array.from({ length: 31 }, (_, index) => ({ label: `${index + 1}`, value: index + 1 })) as unknown as SelectOptionData[],
+  OPTIONS_MONTH_SELECT = Array.from({ length: 12 }, (_, index) => ({ label: `${index + 1}`, value: index + 1 })) as unknown as SelectOptionData[],
   OPTIONS_YEAR_SELECT = Array.from({ length: 79 }, (_, index) => ({ label: `${index + 2021}`, value: index + 2021 })) as unknown as SelectOptionData[] 

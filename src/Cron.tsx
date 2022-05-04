@@ -36,6 +36,7 @@ export default defineComponent({
           second: second.value,
           minute: minute.value,
           hour: hour.value,
+          month: month.value,
           year: year.value
         })
       );

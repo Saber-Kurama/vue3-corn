@@ -80,5 +80,12 @@
     "dist",
     "docs",
     "demo"
-  ]
+  ],
+  "arcoMeta": {
+    "type": "vue-component",
+    "title": "vue3-corn",
+    "category": [
+      "数据展示"
+    ]
+  }
 }

@@ -1,0 +1,24 @@
+{
+  "name": "@dangojs/vue3-corn",
+  "title": "vue3-corn",
+  "description": "",
+  "type": "vue-component",
+  "category": [
+    "数据展示"
+  ],
+  "group": 73,
+  "homepage": "",
+  "repository": "",
+  "author": "Saber-Kurama",
+  "screenshot": "",
+  "package": {
+    "name": "@dangojs/vue3-corn",
+    "version": "latest",
+    "type": "npm",
+    "registry": "",
+    "peerDependencies": [
+      "@arco-design/web-vue",
+      "vue"
+    ]
+  }
+}

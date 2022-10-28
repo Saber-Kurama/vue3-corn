@@ -81,20 +81,22 @@ export default defineComponent({
                 <span>从第</span>
                 <InputNumber
                   mode="button"
+                  class="d-corn-text"
                   style={inputNumberStyle}
                   min={0}
                   max={59}
                   v-model={incrementStart.value}
                 />
-                <span>小时开始 每</span>
+                <span class="d-corn-text">小时开始 每</span>
                 <InputNumber
                   mode="button"
+                  class="d-corn-text"
                   style={inputNumberStyle}
                   min={1}
                   max={59}
                   v-model={incrementIncrement.value}
                 />
-                <span>小时</span>
+                <span class="d-corn-text">小时</span>
               </div>
             </Radio>
           </Row>
@@ -104,20 +106,22 @@ export default defineComponent({
                 <span>周期从</span>
                 <InputNumber
                   mode="button"
+                  class="d-corn-text"
                   style={inputNumberStyle}
                   min={1}
                   max={59}
                   v-model={rangeStart.value}
-                />{" "}
-                <span>到</span>
+                />
+                <span class="d-corn-text">到</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={59}
                   v-model={rangeEnd.value}
                 />
-                <span>小时</span>
+                <span class="d-corn-text">小时</span>
               </div>
             </Radio>
           </Row>
@@ -126,6 +130,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体小时数</span>
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_HOUR_SELECT}
                   style={{ width: "200px" }}
                   multiple

@@ -1,6 +1,10 @@
 import { defineComponent, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
-import { EVERY, OPTIONS_HOUR_SELECT, OPTIONS_YEAR_SELECT } from "../constant/filed";
+import {
+  EVERY,
+  OPTIONS_HOUR_SELECT,
+  OPTIONS_YEAR_SELECT,
+} from "../constant/filed";
 import { getCronEveryText } from "../utils";
 
 export default defineComponent({
@@ -81,20 +85,22 @@ export default defineComponent({
                 <span>从</span>
                 <InputNumber
                   mode="button"
+                  class="d-corn-text"
                   style={inputNumberStyle}
                   min={2021}
                   max={2100}
                   v-model={incrementStart.value}
                 />
-                <span>年开始 每</span>
+                <span class="d-corn-text">年开始 每</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={99}
                   v-model={incrementIncrement.value}
                 />
-                <span>年执行</span>
+                <span class="d-corn-text">年执行</span>
               </div>
             </Radio>
           </Row>
@@ -104,20 +110,22 @@ export default defineComponent({
                 <span>从</span>
                 <InputNumber
                   mode="button"
+                  class="d-corn-text"
                   style={inputNumberStyle}
                   min={2021}
                   max={2100}
                   v-model={rangeStart.value}
-                />{" "}
-                <span>到</span>
+                />
+                <span class="d-corn-text">到</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={2021}
                   max={2100}
                   v-model={rangeEnd.value}
                 />
-                <span>年</span>
+                <span class="d-corn-text">年</span>
               </div>
             </Radio>
           </Row>
@@ -126,6 +134,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体年份</span>
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_YEAR_SELECT}
                   style={{ width: "200px" }}
                   multiple

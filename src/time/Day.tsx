@@ -9,77 +9,77 @@ import {
 } from "../constant/filed";
 
 const getDayCronEveryText = (cronEvery: any, dayData: any, weekData: any) => {
-  if(cronEvery === '*'){
+  if (cronEvery === "*") {
     return {
-      day: '*',
-      week: '?'
-    }
+      day: "*",
+      week: "?",
+    };
   }
-  if(cronEvery === '1'){
+  if (cronEvery === "1") {
     return {
-      day: '?',
-      week: `${weekData.incrementStart}/${weekData.incrementIncrement}`
-    }
+      day: "?",
+      week: `${weekData.incrementStart}/${weekData.incrementIncrement}`,
+    };
   }
-  if(cronEvery === '2'){
+  if (cronEvery === "2") {
     return {
-      week: '?',
-      day: `${dayData.incrementStart}/${dayData.incrementIncrement}`
-    }
+      week: "?",
+      day: `${dayData.incrementStart}/${dayData.incrementIncrement}`,
+    };
   }
-  if(cronEvery === '3'){
+  if (cronEvery === "3") {
     return {
-      day: '?',
-      week: weekData.specificSpecific?.join(',') 
-    }
+      day: "?",
+      week: weekData.specificSpecific?.join(","),
+    };
   }
-  if(cronEvery === '4'){
+  if (cronEvery === "4") {
     return {
-      week: '?',
-      day: dayData.specificSpecific?.join(',') 
-    }
+      week: "?",
+      day: dayData.specificSpecific?.join(","),
+    };
   }
-  if(cronEvery === '5'){
+  if (cronEvery === "5") {
     return {
-      day: 'L',
-      week: '?'
-    }
+      day: "L",
+      week: "?",
+    };
   }
-  if(cronEvery === '6'){
+  if (cronEvery === "6") {
     return {
-      day: 'LW',
-      week: '?'
-    }
+      day: "LW",
+      week: "?",
+    };
   }
-  if(cronEvery === '7'){
+  if (cronEvery === "7") {
     return {
       day: `${dayData.cronLastSpecificDomDay}L`,
-      week: '?'
-    }
+      week: "?",
+    };
   }
-  if(cronEvery === '8'){
+  if (cronEvery === "8") {
     return {
       day: `L-${dayData.cronDaysBeforeEomMinus}`,
-      week: '?'
-    }
+      week: "?",
+    };
   }
-  if(cronEvery === '9'){
+  if (cronEvery === "9") {
     return {
       day: `${dayData.cronDaysNearestWeekday}W`,
-      week: '?'
-    }
+      week: "?",
+    };
   }
-  if(cronEvery === '10'){
+  if (cronEvery === "10") {
     return {
       week: `${weekData.cronNthDayDay}#${weekData.cronNthDayDay}`,
-      day: '?'
-    }
+      day: "?",
+    };
   }
   return {
-    day: '*',
-    week: '?' 
-  }
-}
+    day: "*",
+    week: "?",
+  };
+};
 
 export default defineComponent({
   name: "Day",
@@ -98,7 +98,7 @@ export default defineComponent({
     week: String,
   },
   emits: ["update:day", "update:week"],
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const inputNumberStyle = {
       width: "120px",
     };
@@ -122,9 +122,9 @@ export default defineComponent({
     });
     watch([cronEvery, dayData, weekData], () => {
       const text = getDayCronEveryText(cronEvery.value, dayData, weekData);
-      emit('update:day', text?.day);
-      emit('update:week', text?.week) 
-    })
+      emit("update:day", text?.day);
+      emit("update:week", text?.week);
+    });
     return () => {
       return (
         <div class="d-cron-row-wrap">
@@ -140,19 +140,21 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>从</span>
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
                   v-model={weekData.incrementStart}
                 />
-                <span>开始 每隔</span>
+                <span class="d-corn-text">开始 每隔</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={7}
                   v-model={weekData.incrementIncrement}
                 />
-                <span>周执行</span>
+                <span class="d-corn-text">周执行</span>
               </div>
             </Radio>
           </Row>
@@ -162,20 +164,22 @@ export default defineComponent({
                 <span>从</span>
                 <InputNumber
                   mode="button"
+                  class="d-corn-text"
                   style={inputNumberStyle}
                   min={1}
                   max={31}
                   v-model={dayData.incrementStart}
                 />
-                <span>天开始 每隔</span>
+                <span class="d-corn-text">天开始 每隔</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={31}
                   v-model={dayData.incrementIncrement}
                 />
-                <span>天执行</span>
+                <span class="d-corn-text">天执行</span>
               </div>
             </Radio>
           </Row>
@@ -184,6 +188,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体星期几</span>
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_WEEK_EN_SELECT}
                   style={{ width: "200px" }}
                   multiple
@@ -197,6 +202,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体天数</span>
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_DAY_SELECT}
                   style={{ width: "200px" }}
                   multiple
@@ -222,6 +228,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>在这个月的最后一个</span>
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
                   v-model={dayData.cronLastSpecificDomDay}
@@ -239,7 +246,7 @@ export default defineComponent({
                   max={31}
                   v-model={dayData.cronDaysBeforeEomMinus}
                 />
-                <span>在本月底前</span>
+                <span class="d-corn-text">在本月底前</span>
               </div>
             </Radio>
           </Row>
@@ -248,6 +255,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>最近的工作日（周一至周五）至本月</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
@@ -262,6 +270,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>在这个月的第</span>
                 <InputNumber
+                  class="d-corn-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
@@ -269,6 +278,7 @@ export default defineComponent({
                   v-model={weekData.cronNthDayNth}
                 />
                 <Select
+                  class="d-corn-text"
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
                   v-model={weekData.cronNthDayDay}

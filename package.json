@@ -1,6 +1,6 @@
 {
   "name": "@dangojs/vue3-corn",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -44,7 +44,8 @@
   },
   "devDependencies": {
     "@arco-design/arco-vue-scripts": "^0.2.9",
-    "@arco-design/web-vue": "^2.26.0",
+    "@arco-themes/vue-digitforce": "^0.0.39",
+    "@arco-design/web-vue": "^2.37.4",
     "@babel/core": "^7.17.10",
     "@changesets/cli": "^2.22.0",
     "@dangojs/vue-scripts": "^0.0.4",

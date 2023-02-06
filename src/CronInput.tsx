@@ -57,7 +57,7 @@ export default defineComponent({
                 class="d-corn-bottom-button"
                 onClick={onOK}
               >
-                保存
+                确定
               </Button>
             </div>
           </>

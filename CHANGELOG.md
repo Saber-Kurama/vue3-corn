@@ -1,5 +1,11 @@
 # @dangojs/vue3-cron
 
+## 0.0.6
+
+### Patch Changes
+
+- 解决初始值监听的问题
+
 ## 0.0.5
 
 ### Patch Changes

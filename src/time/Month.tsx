@@ -1,11 +1,12 @@
-import { defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, inject, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
 import {
+  cronContextSymbol,
   EVERY,
   OPTIONS_HOUR_SELECT,
   OPTIONS_MONTH_SELECT,
 } from "../constant/filed";
-import { getCronEveryText } from "../utils";
+import { getCronEveryText, NumberCatch } from "../utils";
 
 export default defineComponent({
   name: "Month",
@@ -22,33 +23,61 @@ export default defineComponent({
     const inputNumberStyle = {
       width: "120px",
     };
+    const cronContext = inject(cronContextSymbol, ref());
     const cronEvery = ref(EVERY);
     const incrementStart = ref(3);
     const incrementIncrement = ref(5);
     const rangeStart = ref(0);
     const rangeEnd = ref(0);
     const specificSpecific = ref<any>([]);
-
+    const isEdit = computed(() => {
+      return cronContext.value.activeKey === "5";
+    });
+    const isCronEveryChange = ref(false);
     watch(
       () => props.modelValue,
       (val) => {
+        if (isEdit.value && isCronEveryChange.value === true) {
+          return;
+        }
         if (val === "*") {
           cronEvery.value = EVERY;
         } else if (val?.includes("/")) {
           cronEvery.value = "1";
+          const v = val.split("/");
+          incrementStart.value = NumberCatch(v[0]);
+          incrementIncrement.value = NumberCatch(v[1]);
         } else if (val?.includes("-")) {
           cronEvery.value = "2";
+          const v = val.split("-");
+          rangeStart.value = NumberCatch(v[0]);
+          rangeEnd.value = NumberCatch(v[1]);
         } else if (val) {
           cronEvery.value = "3";
+          const v = val.split(",");
+          specificSpecific.value = v;
         }
       },
       {
         immediate: true,
       }
     );
+    watch(cronEvery, () => {
+      isCronEveryChange.value = true;
+      emit(
+        "update:modelValue",
+        getCronEveryText({
+          cronEvery: cronEvery.value,
+          incrementStart: incrementStart.value,
+          incrementIncrement: incrementIncrement.value,
+          rangeStart: rangeStart.value,
+          rangeEnd: rangeEnd.value,
+          specificSpecific: specificSpecific.value,
+        })
+      );
+    });
     watch(
       [
-        cronEvery,
         incrementStart,
         incrementIncrement,
         rangeStart,
@@ -56,6 +85,7 @@ export default defineComponent({
         specificSpecific,
       ],
       () => {
+        isCronEveryChange.value = false;
         emit(
           "update:modelValue",
           getCronEveryText({
@@ -136,7 +166,9 @@ export default defineComponent({
                 <Select
                   class="d-corn-text"
                   options={OPTIONS_MONTH_SELECT}
-                  style={{ width: "200px" }}
+                  max-tag-count={3}
+                  style={{ width: "252px" }}
+                  allow-clear
                   multiple
                   v-model={specificSpecific.value}
                 ></Select>

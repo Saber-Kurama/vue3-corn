@@ -33,8 +33,8 @@ const testDayVal = (val: string) => {
     /[0-9]+-[0-9]+/.test(val) ||
     /[0-9]+\/[0-9]+/.test(val) ||
     /[0-9][,0-9]*/.test(val) ||
-    val === 'L' ||
-    val === 'LW' ||
+    val === "L" ||
+    val === "LW" ||
     /L-[0-9]+/.test(val) ||
     /[0-9]W/.test(val) ||
     /[0-9]L/.test(val)
@@ -58,15 +58,15 @@ export const getCronByText = (cornText: string) => {
   let day = cornTextArry[3] || "*";
   if (!testDayVal(day)) {
     day = "*";
-  } 
+  }
   let week = cornTextArry[5] || "?";
   if (!(testVal(week) || /[0-9]#[0-9]/.test(week))) {
     week = "?";
-  } 
+  }
   let month = cornTextArry[4] || "*";
   if (!testVal(month)) {
     month = "*";
-  } 
+  }
   let year = cornTextArry[6] || "*";
   if (!testVal(year)) {
     year = "*";
@@ -78,6 +78,14 @@ export const getCronByText = (cornText: string) => {
     day,
     week,
     month,
-    year
-  } 
+    year,
+  };
+};
+
+export const NumberCatch = (num: string, catchVal?: number) => {
+  try {
+    return Number(num);
+  } catch (error) {
+    return catchVal || 0;
+  }
 };

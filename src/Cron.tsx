@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, provide, ref, watch } from "vue";
 import { Tabs, TabPane } from "@arco-design/web-vue";
 import Second from "./time/Second";
 import Minute from "./time/Minute";
@@ -7,6 +7,7 @@ import Day from "./time/Day";
 import Month from "./time/Month";
 import Year from "./time/Year";
 import { getCronByText } from "./utils";
+import { cronContextSymbol } from "./constant/filed";
 
 const getCornText = ({ second, minute, hour, day, month, week, year }: any) => {
   return `${second} ${minute} ${hour} ${day} ${month} ${week} ${year}`;
@@ -24,6 +25,7 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
+    const activeKey = ref("1");
     const second = ref("*");
     const minute = ref("*");
     const hour = ref("*");
@@ -41,25 +43,44 @@ export default defineComponent({
           day: day.value,
           week: week.value,
           month: month.value,
-          year: year.value
+          year: year.value,
         })
       );
     });
-    watch(() => props.modelValue, () => {
-      const d = getCronByText(props.modelValue || '');
-      second.value = d.second;
-      minute.value = d.minute;
-      hour.value = d.hour;
-      day.value = d.day;
-      week.value = d.week;
-      month.value = d.month;
-      year.value = d.year;
-    }, {
-      immediate: true,
-    })
+    watch(
+      () => props.modelValue,
+      () => {
+        const d = getCronByText(props.modelValue || "");
+        second.value = d.second;
+        minute.value = d.minute;
+        hour.value = d.hour;
+        day.value = d.day;
+        week.value = d.week;
+        month.value = d.month;
+        year.value = d.year;
+      },
+      {
+        immediate: true,
+      }
+    );
+    const changeTab = (key: any) => {
+      activeKey.value = key;
+    };
+    provide(
+      cronContextSymbol,
+      computed(() => {
+        return {
+          activeKey: activeKey.value,
+        };
+      })
+    );
     return () => {
       return (
-        <Tabs default-active-key="1">
+        <Tabs
+          default-active-key="1"
+          activeKey={activeKey.value}
+          onChange={changeTab}
+        >
           <TabPane key="1" title="秒">
             <Second v-model={second.value} />
           </TabPane>

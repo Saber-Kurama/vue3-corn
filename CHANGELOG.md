@@ -1,5 +1,14 @@
 # @dangojs/vue3-cron
 
+## 0.0.5
+
+### Patch Changes
+
+- 更新包名称
+- cron 的日数据错误
+- 解决回显问题
+- 调整样式
+
 ## 0.0.4
 
 ### Patch Changes

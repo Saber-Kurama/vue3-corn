@@ -9,12 +9,12 @@ import Year from "./time/Year";
 import { getCronByText } from "./utils";
 import { cronContextSymbol } from "./constant/filed";
 
-const getCornText = ({ second, minute, hour, day, month, week, year }: any) => {
+const getCronText = ({ second, minute, hour, day, month, week, year }: any) => {
   return `${second} ${minute} ${hour} ${day} ${month} ${week} ${year}`;
 };
 
 export default defineComponent({
-  name: "Corn",
+  name: "Cron",
   props: {
     /**
      * @zh 绑定值
@@ -36,7 +36,7 @@ export default defineComponent({
     watch([second, minute, hour, day, week, month, year], () => {
       emit(
         "update:modelValue",
-        getCornText({
+        getCronText({
           second: second.value,
           minute: minute.value,
           hour: hour.value,

@@ -1,4 +1,4 @@
-# @dangojs/vue3-corn
+# @dangojs/vue3-cron
 
 ## 0.0.4
 
@@ -17,4 +17,4 @@
 
 ### Patch Changes
 
-- corn 组件支持 vue3
+- cron 组件支持 vue3

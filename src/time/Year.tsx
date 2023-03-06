@@ -116,22 +116,22 @@ export default defineComponent({
                 <span>从</span>
                 <InputNumber
                   mode="button"
-                  class="d-corn-text"
+                  class="d-cron-text"
                   style={inputNumberStyle}
                   min={2021}
                   max={2100}
                   v-model={incrementStart.value}
                 />
-                <span class="d-corn-text">年开始 每</span>
+                <span class="d-cron-text">年开始 每</span>
                 <InputNumber
-                  class="d-corn-text"
+                  class="d-cron-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={99}
                   v-model={incrementIncrement.value}
                 />
-                <span class="d-corn-text">年执行</span>
+                <span class="d-cron-text">年执行</span>
               </div>
             </Radio>
           </Row>
@@ -141,22 +141,22 @@ export default defineComponent({
                 <span>从</span>
                 <InputNumber
                   mode="button"
-                  class="d-corn-text"
+                  class="d-cron-text"
                   style={inputNumberStyle}
                   min={2021}
                   max={2100}
                   v-model={rangeStart.value}
                 />
-                <span class="d-corn-text">到</span>
+                <span class="d-cron-text">到</span>
                 <InputNumber
-                  class="d-corn-text"
+                  class="d-cron-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={2021}
                   max={2100}
                   v-model={rangeEnd.value}
                 />
-                <span class="d-corn-text">年</span>
+                <span class="d-cron-text">年</span>
               </div>
             </Radio>
           </Row>
@@ -165,7 +165,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体年份</span>
                 <Select
-                  class="d-corn-text"
+                  class="d-cron-text"
                   options={OPTIONS_YEAR_SELECT}
                   max-tag-count={2}
                   style={{ width: "252px" }}

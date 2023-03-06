@@ -117,23 +117,23 @@ export default defineComponent({
                 <div class="d-cron-second-radio-item">
                   <span>从第</span>
                   <InputNumber
-                    class="d-corn-text"
+                    class="d-cron-text"
                     mode="button"
                     style={inputNumberStyle}
                     min={0}
                     max={59}
                     v-model={incrementStart.value}
                   />
-                  <span class="d-corn-text">秒开始 每</span>
+                  <span class="d-cron-text">秒开始 每</span>
                   <InputNumber
                     mode="button"
                     style={inputNumberStyle}
-                    class="d-corn-text"
+                    class="d-cron-text"
                     min={1}
                     max={59}
                     v-model={incrementIncrement.value}
                   />
-                  <span class="d-corn-text">秒</span>
+                  <span class="d-cron-text">秒</span>
                 </div>
               </Radio>
             </Row>
@@ -143,22 +143,22 @@ export default defineComponent({
                   <span>周期从</span>
                   <InputNumber
                     mode="button"
-                    class="d-corn-text"
+                    class="d-cron-text"
                     style={inputNumberStyle}
                     min={1}
                     max={59}
                     v-model={rangeStart.value}
                   />
-                  <span class="d-corn-text">到</span>
+                  <span class="d-cron-text">到</span>
                   <InputNumber
                     mode="button"
-                    class="d-corn-text"
+                    class="d-cron-text"
                     style={inputNumberStyle}
                     min={1}
                     max={59}
                     v-model={rangeEnd.value}
                   />
-                  <span class="d-corn-text">秒</span>
+                  <span class="d-cron-text">秒</span>
                 </div>
               </Radio>
             </Row>
@@ -167,7 +167,7 @@ export default defineComponent({
                 <div class="d-cron-second-radio-item">
                   <span>具体秒数</span>
                   <Select
-                    class="d-corn-text"
+                    class="d-cron-text"
                     options={OPTIONS_SELECT}
                     max-tag-count={3}
                     style={{ width: "252px" }}

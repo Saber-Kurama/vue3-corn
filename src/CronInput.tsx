@@ -47,14 +47,14 @@ export default defineComponent({
         return (
           <>
             <Cron v-model={cron.value} />
-            <div class="d-corn-bottom">
-              <div class="d-corn-bottom-text">{cron.value}</div>
-              <Button class="d-corn-bottom-button" onClick={onCancle}>
+            <div class="d-cron-bottom">
+              <div class="d-cron-bottom-text">{cron.value}</div>
+              <Button class="d-cron-bottom-button" onClick={onCancle}>
                 取消
               </Button>
               <Button
                 type="primary"
-                class="d-corn-bottom-button"
+                class="d-cron-bottom-button"
                 onClick={onOK}
               >
                 确定

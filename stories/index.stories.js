@@ -1,10 +1,10 @@
-import '../src/style';
+import "../src/style";
 
-export * from '../demo';
+export * from "../demo";
 
 // import TooltipButton from '../src/TooltipButton.vue';
 export default {
-  title: 'vue3-corn',
+  title: "vue3-cron",
   // component: TooltipButton,
   // argTypes: {
   //   tip: {
@@ -12,5 +12,5 @@ export default {
   //       type: 'text'
   //     }
   //   },
-  // }, 
+  // },
 };

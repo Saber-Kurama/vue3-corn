@@ -40,34 +40,34 @@ const testDayVal = (val: string) => {
     /[0-9]L/.test(val)
   );
 };
-export const getCronByText = (cornText: string) => {
+export const getCronByText = (cronText: string) => {
   // 保留前6位
-  const cornTextArry = cornText.split(" ").filter((_, index) => index <= 6);
-  let second = cornTextArry[0] || "*";
+  const cronTextArry = cronText.split(" ").filter((_, index) => index <= 6);
+  let second = cronTextArry[0] || "*";
   // if (!testVal(second)) {
   //   second = "*";
   // }
-  let minute = cornTextArry[1] || "*";
+  let minute = cronTextArry[1] || "*";
   // if (!testVal(minute)) {
   //   minute = "*";
   // }
-  let hour = cornTextArry[2] || "*";
+  let hour = cronTextArry[2] || "*";
   // if (!testVal(hour)) {
   //   hour = "*";
   // }
-  let day = cornTextArry[3] || "*";
+  let day = cronTextArry[3] || "*";
   // if (!testDayVal(day)) {
   //   day = "*";
   // }
-  let week = cornTextArry[5] || "?";
+  let week = cronTextArry[5] || "?";
   // if (!(testVal(week) || /[0-9]#[0-9]/.test(week))) {
   //   week = "?";
   // }
-  let month = cornTextArry[4] || "*";
+  let month = cronTextArry[4] || "*";
   // if (!testVal(month)) {
   //   month = "*";
   // }
-  let year = cornTextArry[6] || "*";
+  let year = cronTextArry[6] || "*";
   // if (!testVal(year)) {
   //   year = "*";
   // }

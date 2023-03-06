@@ -1,24 +1,19 @@
 {
-  "name": "@dangojs/vue3-corn",
-  "title": "vue3-corn",
+  "name": "@dangojs/vue3-cron",
+  "title": "vue3-cron",
   "description": "",
   "type": "vue-component",
-  "category": [
-    "数据展示"
-  ],
+  "category": ["数据展示"],
   "group": 73,
   "homepage": "",
   "repository": "",
   "author": "Saber-Kurama",
   "screenshot": "",
   "package": {
-    "name": "@dangojs/vue3-corn",
+    "name": "@dangojs/vue3-cron",
     "version": "latest",
     "type": "npm",
     "registry": "",
-    "peerDependencies": [
-      "@arco-design/web-vue",
-      "vue"
-    ]
+    "peerDependencies": ["@arco-design/web-vue", "vue"]
   }
 }

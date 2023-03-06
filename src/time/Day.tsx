@@ -225,21 +225,21 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>从</span>
                 <Select
-                  class="d-corn-text"
+                  class="d-cron-text"
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
                   v-model={weekData.incrementStart}
                 />
-                <span class="d-corn-text">开始 每隔</span>
+                <span class="d-cron-text">开始 每隔</span>
                 <InputNumber
-                  class="d-corn-text"
+                  class="d-cron-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={7}
                   v-model={weekData.incrementIncrement}
                 />
-                <span class="d-corn-text">周执行</span>
+                <span class="d-cron-text">周执行</span>
               </div>
             </Radio>
           </Row>
@@ -249,22 +249,22 @@ export default defineComponent({
                 <span>从</span>
                 <InputNumber
                   mode="button"
-                  class="d-corn-text"
+                  class="d-cron-text"
                   style={inputNumberStyle}
                   min={1}
                   max={31}
                   v-model={dayData.incrementStart}
                 />
-                <span class="d-corn-text">天开始 每隔</span>
+                <span class="d-cron-text">天开始 每隔</span>
                 <InputNumber
-                  class="d-corn-text"
+                  class="d-cron-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
                   max={31}
                   v-model={dayData.incrementIncrement}
                 />
-                <span class="d-corn-text">天执行</span>
+                <span class="d-cron-text">天执行</span>
               </div>
             </Radio>
           </Row>
@@ -273,7 +273,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体星期几</span>
                 <Select
-                  class="d-corn-text"
+                  class="d-cron-text"
                   options={OPTIONS_WEEK_SELECT}
                   max-tag-count={2}
                   style={{ width: "252px" }}
@@ -289,7 +289,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>具体天数</span>
                 <Select
-                  class="d-corn-text"
+                  class="d-cron-text"
                   options={OPTIONS_DAY_SELECT}
                   max-tag-count={3}
                   style={{ width: "252px" }}
@@ -317,7 +317,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>在这个月的最后一个</span>
                 <Select
-                  class="d-corn-text"
+                  class="d-cron-text"
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
                   v-model={dayData.cronLastSpecificDomDay}
@@ -335,7 +335,7 @@ export default defineComponent({
                   max={31}
                   v-model={dayData.cronDaysBeforeEomMinus}
                 />
-                <span class="d-corn-text">在本月底前</span>
+                <span class="d-cron-text">在本月底前</span>
               </div>
             </Radio>
           </Row>
@@ -344,7 +344,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>最近的工作日（周一至周五）至本月</span>
                 <InputNumber
-                  class="d-corn-text"
+                  class="d-cron-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
@@ -359,7 +359,7 @@ export default defineComponent({
               <div class="d-cron-second-radio-item">
                 <span>在这个月的第</span>
                 <InputNumber
-                  class="d-corn-text"
+                  class="d-cron-text"
                   mode="button"
                   style={inputNumberStyle}
                   min={1}
@@ -367,7 +367,7 @@ export default defineComponent({
                   v-model={weekData.cronNthDayNth}
                 />
                 <Select
-                  class="d-corn-text"
+                  class="d-cron-text"
                   options={OPTIONS_WEEK_SELECT}
                   style={inputNumberStyle}
                   v-model={weekData.cronNthDayDay}

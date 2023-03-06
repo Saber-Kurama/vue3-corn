@@ -1,5 +1,5 @@
 {
-  "name": "@dangojs/vue3-corn",
+  "name": "@dangojs/vue3-cron",
   "version": "0.0.4",
   "description": "",
   "main": "dist/index.cjs.js",
@@ -84,7 +84,7 @@
   ],
   "arcoMeta": {
     "type": "vue-component",
-    "title": "vue3-corn",
+    "title": "vue3-cron",
     "category": [
       "数据展示"
     ]

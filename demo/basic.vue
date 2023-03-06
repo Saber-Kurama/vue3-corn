@@ -3,17 +3,13 @@
   <div>{{ cron }}</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from "vue";
 // import CronInput from "@dangojs/vue3-cron";
 import CronInput from "../src/index";
-// 目前vue-live导出defineComponent存在问题，所以仅支持普通对象导出。
-export default {
-  name: "BasicDemo",
-  data: () => ({
-    cron: "1-15 * 0-20 * * ? *",
-  }),
-  components: {
-    CronInput,
-  },
-};
+const cron = ref("1-15 * 0-20 * * ? *");
+
+setTimeout(() => {
+  cron.value = "* * 0-20 * * ? *";
+}, 3000);
 </script>

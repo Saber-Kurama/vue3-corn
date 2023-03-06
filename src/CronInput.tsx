@@ -27,6 +27,13 @@ export default defineComponent({
       // _popupVisible.value = visible;
       // console.log('visiblevisible', visible);
     };
+    watch(
+      () => props.modelValue,
+      () => {
+        cron.value = props.modelValue;
+        inputCron.value = props.modelValue;
+      }
+    );
     const onOK = () => {
       inputCron.value = cron.value;
       popupVisible.value = false;

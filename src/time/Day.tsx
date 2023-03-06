@@ -1,12 +1,14 @@
-import { defineComponent, reactive, ref, watch } from "vue";
+import { computed, defineComponent, inject, reactive, ref, watch } from "vue";
 import { InputNumber, Radio, Row, Select } from "@arco-design/web-vue";
 import {
+  cronContextSymbol,
   EVERY,
   OPTIONS_DAY_SELECT,
   OPTIONS_SELECT,
   OPTIONS_WEEK_EN_SELECT,
   OPTIONS_WEEK_SELECT,
 } from "../constant/filed";
+import { NumberCatch } from "../utils";
 
 const getDayCronEveryText = (cronEvery: any, dayData: any, weekData: any) => {
   if (cronEvery === "*") {
@@ -71,7 +73,7 @@ const getDayCronEveryText = (cronEvery: any, dayData: any, weekData: any) => {
   }
   if (cronEvery === "10") {
     return {
-      week: `${weekData.cronNthDayDay}#${weekData.cronNthDayDay}`,
+      week: `${weekData.cronNthDayDay}#${weekData.cronNthDayNth}`,
       day: "?",
     };
   }
@@ -102,6 +104,11 @@ export default defineComponent({
     const inputNumberStyle = {
       width: "120px",
     };
+    const cronContext = inject(cronContextSymbol, ref());
+    const isEdit = computed(() => {
+      return cronContext.value.activeKey === "4";
+    });
+    const isCronEveryChange = ref(false);
     const cronEvery = ref(EVERY);
     const dayData = reactive({
       incrementStart: 1,
@@ -116,11 +123,89 @@ export default defineComponent({
     const weekData = reactive({
       incrementStart: 1,
       incrementIncrement: 1,
-      specificSpecific: [],
-      cronNthDayDay: 1,
+      specificSpecific: [] as any[],
+      cronNthDayDay: "1",
       cronNthDayNth: 1,
     });
-    watch([cronEvery, dayData, weekData], () => {
+    watch(
+      [() => props.day, () => props.week],
+      ([dayv, weekv]) => {
+        if (isEdit.value && isCronEveryChange.value === true) {
+          return;
+        }
+        if (dayv === "*" && weekv === "?") {
+          cronEvery.value = EVERY;
+          return;
+        }
+        if (dayv === "?" && weekv?.includes("/")) {
+          cronEvery.value = "1";
+          const v = weekv.split("/");
+          weekData.incrementStart = NumberCatch(v[0]);
+          weekData.incrementIncrement = NumberCatch(v[1]);
+          return;
+        }
+        if (weekv === "?" && dayv?.includes("/")) {
+          cronEvery.value = "2";
+          const v = dayv.split("/");
+          dayData.incrementStart = NumberCatch(v[0]);
+          dayData.incrementIncrement = NumberCatch(v[1]);
+          return;
+        }
+        if (dayv === "L" && weekv === "?") {
+          cronEvery.value = "5";
+          return;
+        }
+        if (dayv === "LW" && weekv === "?") {
+          cronEvery.value = "6";
+          return;
+        }
+        if (dayv?.endsWith("L-") && weekv === "?") {
+          cronEvery.value = "7";
+          dayData.cronLastSpecificDomDay = parseInt(dayv);
+          return;
+        }
+        if (dayv?.startsWith("L") && weekv === "?") {
+          cronEvery.value = "8";
+          dayData.cronDaysBeforeEomMinus = parseInt(dayv.slice(2));
+          return;
+        }
+        if (dayv?.endsWith("W") && weekv === "?") {
+          cronEvery.value = "9";
+          dayData.cronDaysNearestWeekday = parseInt(dayv);
+          return;
+        }
+        if (dayv === "?" && weekv?.includes("#")) {
+          cronEvery.value = "10";
+          const v = weekv.split("#");
+          weekData.cronNthDayDay = v[0] as any;
+          weekData.cronNthDayNth = NumberCatch(v[1]);
+          return;
+        }
+        if (dayv === "?" && weekv) {
+          cronEvery.value = "3";
+          const v = weekv.split(",");
+          weekData.specificSpecific = v as any[];
+          return;
+        }
+        if (weekv === "?" && dayv) {
+          cronEvery.value = "4";
+          const v = dayv.split(",");
+          dayData.specificSpecific = v as any[];
+          return;
+        }
+      },
+      {
+        immediate: true,
+      }
+    );
+    watch(cronEvery, () => {
+      isCronEveryChange.value = true;
+      const text = getDayCronEveryText(cronEvery.value, dayData, weekData);
+      emit("update:day", text?.day);
+      emit("update:week", text?.week);
+    });
+    watch([dayData, weekData], () => {
+      isCronEveryChange.value = false;
       const text = getDayCronEveryText(cronEvery.value, dayData, weekData);
       emit("update:day", text?.day);
       emit("update:week", text?.week);
@@ -189,8 +274,10 @@ export default defineComponent({
                 <span>具体星期几</span>
                 <Select
                   class="d-corn-text"
-                  options={OPTIONS_WEEK_EN_SELECT}
-                  style={{ width: "200px" }}
+                  options={OPTIONS_WEEK_SELECT}
+                  max-tag-count={2}
+                  style={{ width: "252px" }}
+                  allow-clear
                   multiple
                   v-model={weekData.specificSpecific}
                 ></Select>
@@ -204,7 +291,9 @@ export default defineComponent({
                 <Select
                   class="d-corn-text"
                   options={OPTIONS_DAY_SELECT}
-                  style={{ width: "200px" }}
+                  max-tag-count={3}
+                  style={{ width: "252px" }}
+                  allow-clear
                   multiple
                   v-model={dayData.specificSpecific}
                 ></Select>

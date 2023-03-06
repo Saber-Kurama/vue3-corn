@@ -167,7 +167,7 @@ export default defineComponent({
                 <Select
                   class="d-corn-text"
                   options={OPTIONS_YEAR_SELECT}
-                  max-tag-count={3}
+                  max-tag-count={2}
                   style={{ width: "252px" }}
                   allow-clear
                   multiple

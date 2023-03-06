@@ -44,33 +44,33 @@ export const getCronByText = (cornText: string) => {
   // 保留前6位
   const cornTextArry = cornText.split(" ").filter((_, index) => index <= 6);
   let second = cornTextArry[0] || "*";
-  if (!testVal(second)) {
-    second = "*";
-  }
+  // if (!testVal(second)) {
+  //   second = "*";
+  // }
   let minute = cornTextArry[1] || "*";
-  if (!testVal(minute)) {
-    minute = "*";
-  }
+  // if (!testVal(minute)) {
+  //   minute = "*";
+  // }
   let hour = cornTextArry[2] || "*";
-  if (!testVal(hour)) {
-    hour = "*";
-  }
+  // if (!testVal(hour)) {
+  //   hour = "*";
+  // }
   let day = cornTextArry[3] || "*";
-  if (!testDayVal(day)) {
-    day = "*";
-  }
+  // if (!testDayVal(day)) {
+  //   day = "*";
+  // }
   let week = cornTextArry[5] || "?";
-  if (!(testVal(week) || /[0-9]#[0-9]/.test(week))) {
-    week = "?";
-  }
+  // if (!(testVal(week) || /[0-9]#[0-9]/.test(week))) {
+  //   week = "?";
+  // }
   let month = cornTextArry[4] || "*";
-  if (!testVal(month)) {
-    month = "*";
-  }
+  // if (!testVal(month)) {
+  //   month = "*";
+  // }
   let year = cornTextArry[6] || "*";
-  if (!testVal(year)) {
-    year = "*";
-  }
+  // if (!testVal(year)) {
+  //   year = "*";
+  // }
   return {
     second,
     minute,
